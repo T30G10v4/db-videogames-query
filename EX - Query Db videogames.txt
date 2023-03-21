@@ -120,16 +120,43 @@ JOIN
 
 1- Selezionare i dati di tutti giocatori che hanno scritto almeno una recensione, mostrandoli una sola volta (996)
 
-
+select distinct p.* from players p 
+inner join reviews r 
+where p.id = r.player_id 
 
 
 2- Sezionare tutti i videogame dei tornei tenuti nel 2016, mostrandoli una sola volta (226)
 
+select distinct(v.name)  from tournaments t 
+inner join tournament_videogame tv 
+inner join videogames v
+where t.id = tv.tournament_id and TV.videogame_id = V.ID and t.`year` = 2016
+
+
 3- Mostrare le categorie di ogni videogioco (1718)
+
+select v.name, c.name from categories c 
+inner join category_videogame cv 
+inner join videogames v 
+where c.id = cv.category_id and cv.videogame_id =v.id 
+
 
 4- Selezionare i dati di tutte le software house che hanno rilasciato almeno un gioco dopo il 2020, mostrandoli una sola volta (6)
 
+select distinct sh.* from software_houses sh 
+inner join videogames v 
+where sh.id = v.software_house_id 
+and year(v.release_date)>=2020
+
+
 5- Selezionare i premi ricevuti da ogni software house per i videogiochi che ha prodotto (55)
+
+select  a.* from software_houses sh 
+inner join videogames v 
+inner join award_videogame av 
+inner join awards a
+where sh.id = v.software_house_id and v.id =av.videogame_id and av.award_id = A.id 
+
 
 6- Selezionare categorie e classificazioni PEGI dei videogiochi che hanno ricevuto recensioni da 4 e 5 stelle, mostrandole una sola volta (3363)
 
