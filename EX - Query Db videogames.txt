@@ -160,14 +160,14 @@ where sh.id = v.software_house_id and v.id =av.videogame_id and av.award_id = A.
 
 6- Selezionare categorie e classificazioni PEGI dei videogiochi che hanno ricevuto recensioni da 4 e 5 stelle, mostrandole una sola volta (3363)
 
-select c.name, pl.name from reviews r 
+select v.id, c.name, pl.name from reviews r 
 inner join videogames v on r.videogame_id  = v.id 
 inner join category_videogame cv on cv.videogame_id = v.id 
 inner join categories c on c.id = cv.category_id 
 inner join pegi_label_videogame plv on plv.videogame_id = v.id 
 inner join pegi_labels pl on pl.id = plv.pegi_label_id 
 where r.rating >=4 and r.rating <=5
-group by c.name, pl.name
+group by v.id, c.name, pl.name
 
 
 7- Selezionare quali giochi erano presenti nei tornei nei quali hanno partecipato i giocatori il cui nome inizia per 'S' (474)
